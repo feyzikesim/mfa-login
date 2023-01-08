@@ -31,13 +31,13 @@ while [[ $MAX_ATTEMPTS -gt 0 ]]; do
                             MAX_ATTEMPTS=$((MAX_ATTEMPTS-1))
                         fi
                     else
-                        whiptail --msgbox "Transaction cancelled." 8 78
+                        whiptail --msgbox "Cancelled." 8 78
                         sudo pkill -P $SSH_PID
                     fi
                 fi
             fi
         else
-            whiptail --msgbox "Transaction cancelled." 8 78
+            whiptail --msgbox "Cancelled." 8 78
             sudo pkill -P $SSH_PID
         fi
     fi
