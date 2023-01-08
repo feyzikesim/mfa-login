@@ -1,6 +1,6 @@
 # Multi-factor Authentication System to Access Linux Terminal
 
-MFA login screen for Linux terminal made by using Whiptail. *bashrc_append.txt* file could be modified based on your needs. In the current version, it's more suitable for remote devices. Unauthorized login attempts are limited to 3. If its exceeded, SSH process is killed (its just a playground, you can disable or change it as you wish)
+MFA login screen for Linux terminal made by using Whiptail. *bashrc_append.txt* file could be modified based on your needs. In the current version, it's more suitable for remote devices. Unauthorized login attempts are limited to 3. If it's exceeded, SSH process is killed (its just a playground, you can disable or change it as you wish).
 
 ## Installation
 
@@ -41,7 +41,7 @@ And here's a failed login attempt;
 
 ## P.S to keep myself away from responsibility
 
-Use it on your own risk. It's only tested on Raspberry Pi 4 buster. Bash version and unsynchronized system clock can cause problems. Before giving a shot, remove the **sudo pkill -P $SSH_PID** lines to **break** in *bashrc_append.txt* file.
+Use it on your own risk. It's only tested on Raspberry Pi 4 buster. Bash version and unsynchronized system clock can cause problems. Before giving it a shot, remove the **sudo pkill -P $SSH_PID** lines to **break** in *bashrc_append.txt* file.
 
 ## License
 
