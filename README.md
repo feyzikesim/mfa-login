@@ -33,12 +33,11 @@ python3 -c "import sqlite_ops; sqlite_ops.remove_db_record('EMAIL')"
 ## Sample Login Attempts
 Use [here](https://dan.hersam.com/tools/gen-qr-code.php) to add login information to your authenticator app (KEY field should be Base32 encoded string). I created a db record *test@gmail.com* as email and *NBQWQYLIMFUGC===* as secret key. Here's a successful login attempt;
 
-![](https://github.com/feyzikesim/mfa_login/pictures/successful_login.gif)
+![](https://github.com/feyzikesim/mfa_login/tree/main/pictures/successful_login.gif)
 
 And here's a failed login attempt;
 
-![](https://github.com/feyzikesim/mfa_login/pictures/failed_login.gif)
-
+![](https://github.com/feyzikesim/mfa_login/tree/main/pictures/failed_login.gif)
 
 ## License
 
