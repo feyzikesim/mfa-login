@@ -8,7 +8,7 @@ MFA login screen for Linux terminal made by using Whiptail. *bashrc_append.txt* 
 sudo apt-get update
 sudo apt-get install -y whiptail
 
-git clone https://github.com/feyzikesim/mfa-login ~/
+git clone https://github.com/feyzikesim/mfa_login ~/mfa_login
 touch ~/mfa.db
 
 cat ~/mfa_login/bashrc_append.txt >> ~/.bashrc
