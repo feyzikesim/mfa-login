@@ -39,6 +39,10 @@ And here's a failed login attempt;
 
 ![](https://github.com/feyzikesim/mfa_login/blob/main/pictures/failed_login.gif)
 
+## P.S to keep myself away from responsibility
+
+Use it on your own risk. It's only tested on Raspberry Pi 4 buster. Bash version and unsynchronized system clock can cause problems. Before giving a shot, remove the **sudo pkill -P $SSH_PID** lines to **break** in *bashrc_append.txt* file.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
