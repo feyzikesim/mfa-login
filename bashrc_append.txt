@@ -1,0 +1,49 @@
+PYTHONPATH="${PYTHONPATH}:$HOME"
+MAX_ATTEMPTS=3
+SSH_PID=$(ps aux | awk '{print $2 $11}' | grep "/usr/sbin/sshd" | sed 's/[^0-9]*//g')
+
+while [[ $MAX_ATTEMPTS -gt 0 ]]; do
+    records=$(python3 -B -c "from mfa_login import sqlite_ops; print(sqlite_ops.check_if_any_record_exists())")
+    if [[ $records -eq 0 ]]; then
+        whiptail --msgbox "There is no saved authorized user, skipping MFA check." 8 78
+        break
+    else
+        user=$(whiptail --inputbox "Enter your email here: " 8 78 3>&1 1>&2 2>&3)
+        if [[ $? -eq 0 ]]; then
+            if [[ $user = "" ]]; then
+                whiptail --msgbox "This field cannot be left blank." 8 78
+                MAX_ATTEMPTS=$((MAX_ATTEMPTS-1))
+            else
+                check_email=$(python3 -B -c "from mfa_login import sqlite_ops; print(sqlite_ops.check_if_email_exists('$user'))")
+
+                if [[ $check_email -eq 0 ]]; then
+                    whiptail --msgbox "Given email address not recognized. Enter a valid email." 8 78
+                    MAX_ATTEMPTS=$((MAX_ATTEMPTS-1))
+                else
+                    verification_code=$(whiptail --inputbox "Enter the Two-factor Authentication code here: " 8 78 3>&1 1>&2 2>&3)
+                    if [[ $? -eq 0 ]]; then
+                        code=$(python3 -B ~/mfa_login/get_mfa_code.py $user)
+                        if [[ $code = $verification_code ]]; then
+                            whiptail --msgbox "Login successful." 8 78
+                            break
+                        else
+                            whiptail --msgbox "Invalid login informations." 8 78
+                            MAX_ATTEMPTS=$((MAX_ATTEMPTS-1))
+                        fi
+                    else
+                        whiptail --msgbox "Transaction cancelled." 8 78
+                        sudo pkill -P $SSH_PID
+                    fi
+                fi
+            fi
+        else
+            whiptail --msgbox "Transaction cancelled." 8 78
+            sudo pkill -P $SSH_PID
+        fi
+    fi
+done
+
+if [[ $MAX_ATTEMPTS -eq 0 ]]; then
+    whiptail --msgbox "No login attempts left." 8 78
+    sudo pkill -P $SSH_PID
+fi
