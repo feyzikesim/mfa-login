@@ -26,7 +26,7 @@ python3 -c "import sqlite_ops; sqlite_ops.list_all_records()"
 # or
 python3 -c "import sqlite_ops; sqlite_ops.list_all_records(True)"  # pass True to view emails with secret keys
 
-# To remove a email & secret key pair
+# To remove an email & secret key pair
 python3 -c "import sqlite_ops; sqlite_ops.remove_db_record('EMAIL')"
 ```
 
